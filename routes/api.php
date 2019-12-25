@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('newsletter', 'Newsletter\NewsletterController@store');
+
+
+Route::post('test', function() {
+    return 'adsf';
+});
