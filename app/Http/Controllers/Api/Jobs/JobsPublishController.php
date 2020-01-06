@@ -23,7 +23,7 @@ class JobsPublishController extends Controller
             $paymentMethod = $request->input('paymentMethod');
             // return url to handle 3D secure payment
             $payment = $user->charge(25000, $paymentMethod, [
-                'return_url' => 'https://localhost:8081/job-post'
+                'return_url' => 'https://localhost:8080/job-post'
             ]);
     
             // set the job as paid
