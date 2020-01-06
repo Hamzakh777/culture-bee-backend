@@ -22,8 +22,13 @@ Route::middleware('auth:api')->group(function () {
     // jobs
     // Route::get('jobs', 'Api\Jobs\JobsController@index');
     // Route::post('jobs', 'Api\Jobs\JobsController@store');
-    Route::post('logout', 'Api\AuthController@logout');
     // Route::post('jobs/{id}/publish', 'Api\Jobs\JobsPublishController');
+    
+    // auth
+    Route::post('logout', 'Api\AuthController@logout');
+
+    // user
+    Route::put('profile', 'Api\Profile\ProfileController@update');
 });
 
 Route::post('login', 'Api\AuthController@login');
