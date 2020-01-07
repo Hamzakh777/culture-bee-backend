@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Industry extends Model
+class Benefits extends Model
 {
     //
 }

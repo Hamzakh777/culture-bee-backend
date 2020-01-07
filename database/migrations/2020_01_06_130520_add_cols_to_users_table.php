@@ -15,6 +15,10 @@ class AddColsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_img_url')->nullable();
+            $table->string('location')->nullable();
+            $table->string('company_name')->nullable();
+            $table->json('skills')->nullable();
+            $table->string('industry')->nullable();
         });
     }
 
