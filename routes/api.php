@@ -29,7 +29,7 @@ Route::middleware('auth:api')->group(function () {
 
     // user
     Route::post('profile', 'Api\Profile\ProfileController@update');
-    // Route::get('profile', 'Api\Profile\ProfileController@index');
+    Route::get('profile', 'Api\Profile\ProfileController@index');
 });
 
 Route::post('login', 'Api\AuthController@login');
