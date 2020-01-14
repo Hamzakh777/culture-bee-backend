@@ -43,4 +43,9 @@ class User extends Authenticatable
     public function values() {
         return $this->hasMany('App\CompanyValue', 'user_id');
     }
+
+    public function updates()
+    {
+        return $this->hasMany('App\CompanyUpdates', 'user_id');
+    }
 }

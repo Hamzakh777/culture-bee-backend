@@ -33,6 +33,7 @@ Route::middleware('auth:api')->group(function () {
 
     // employer
     Route::post('/employer/values', 'Api\Employer\ValuesController@store');
+    Route::post('/employer/updates', 'Api\Employer\UpdatesController@store');
 });
 
 Route::post('login', 'Api\AuthController@login');
