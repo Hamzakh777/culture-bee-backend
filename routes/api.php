@@ -30,6 +30,9 @@ Route::middleware('auth:api')->group(function () {
     // user
     Route::post('profile', 'Api\Profile\ProfileController@update');
     Route::get('profile', 'Api\Profile\ProfileController@index');
+
+    // employer
+    Route::post('/employer/values', 'Api\Employer\ValuesController@store');
 });
 
 Route::post('login', 'Api\AuthController@login');

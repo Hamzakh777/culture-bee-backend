@@ -39,4 +39,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'skills' => 'array'
     ];
+
+    public function values() {
+        return $this->hasMany('App\CompanyValue', 'user_id');
+    }
 }
