@@ -21,6 +21,8 @@ class Users extends JsonResource
             'name' => $this->name,
             'companyName' => $this->company_name,
             'profileImgUrl' => $this->profile_img_url,
+            'coverImgUrl' => $this->cover_img_url,
+            'quickPitch' => $this->quick_pitch,
             'role' => $this->roles->pluck('name')
         ];
     }

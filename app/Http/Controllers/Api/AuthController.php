@@ -50,7 +50,7 @@ class AuthController extends Controller
         $request->request->add([
             'grant_type'    => 'password',
             'client_id'     => 1,
-            'client_secret' => 'ecUUnwVHqRuCSbJpHECmYO2HzfpdX1FJf1vnzpWM',
+            'client_secret' => 'dkNlKog5hPu87BJJcRCJRJCbg7oJQc6d4IIfmgDU',
             'username'      => $request->input('email'),
             'password'      => $request->input('password'),
             'scope'         => '',

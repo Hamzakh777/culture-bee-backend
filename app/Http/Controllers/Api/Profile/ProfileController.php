@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Resources\Users;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -15,15 +16,26 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request) {
-        $user = Auth::user();
+        $user = User::find(auth()->id());
 
         $user->name = $request->input('name');
-        
-        if($request->hasFile('profileImgFile')) {
-            $user->profile_img_url = $request->file('profileImgFile')->store(
+
+        if ($request->hasFile('profileImgFile')) {
+            $path  = $request->file('profileImgFile')->store(
                 'users/profile-img',
                 'do_spaces'
             );
+
+            $user->profile_img_url = Storage::disk('do_spaces')->url($path);
+        }
+
+        if ($request->hasFile('coverImgFile')) {
+            $path  = $request->file('coverImgFile')->store(
+                'users/cover-img',
+                'do_spaces'
+            );
+
+            $user->cover_img_url = Storage::disk('do_spaces')->url($path);
         }
 
         if ($request->has('location')) {
@@ -46,7 +58,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'userId' => $user->id,
-            'request' => $request->input('location')
+            'user' => new Users($user)
         ]);
     }   
 }
