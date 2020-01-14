@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Employer;
 
+use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class ValuesController extends Controller
         $user = User::find($id);
 
         return response()->json([
-            'values' => 
-        ])
+            'values' => $user->values
+        ]);
     }
 
     /**
