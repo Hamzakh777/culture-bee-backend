@@ -31,9 +31,14 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile', 'Api\Profile\ProfileController@update');
     Route::get('profile', 'Api\Profile\ProfileController@index');
 
-    // employer
+    // ***************** employer
     Route::post('/employer/values', 'Api\Employer\ValuesController@store');
+
+    // update
     Route::post('/employer/updates', 'Api\Employer\UpdatesController@store');
+    Route::delete('/employer/updates/{id}', 'Api\Employer\UpdatesController@destroy');
+    Route::get('/employer/{id}/updates', 'Api\Employer\UpdatesController@index');
+    
 });
 
 Route::post('login', 'Api\AuthController@login');
