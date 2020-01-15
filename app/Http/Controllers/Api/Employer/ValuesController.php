@@ -31,7 +31,7 @@ class ValuesController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
+        $user = User::find(auth()->id());
 
         $request->validate([
             'values' => 'required',
@@ -51,6 +51,14 @@ class ValuesController extends Controller
         }
 
         DB::table('company_values')->insert($updatedValues);
+
+        // if its the first time the user is creating values
+        // we increment his profile creation step
+        if($user->current_profile_creation_step === 1) {
+            $user->current_profile_creation_step = 2;
+
+            $user->save();
+        }
 
         return [
             'success' => true
