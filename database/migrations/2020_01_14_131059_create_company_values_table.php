@@ -16,7 +16,7 @@ class CreateCompanyValuesTable extends Migration
         Schema::create('company_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('icon')->nullable();
-            $table->string('title')->nullage();
+            $table->string('title')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users')
