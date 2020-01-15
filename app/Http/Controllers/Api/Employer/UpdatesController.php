@@ -18,7 +18,11 @@ class UpdatesController extends Controller
      */
     public function index($id)
     {
-        
+        $updates = User::find($id)->companyUpdates;
+
+        return response()->json([
+            'updates' => CompanyUpdateResource::collection($updates)
+        ]);
     }
 
     /**
@@ -76,6 +80,10 @@ class UpdatesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CompanyUpdate::find($id)->delete();
+        
+        return response()->json([
+            'success' => true
+        ]);
     }
 }
