@@ -46,6 +46,10 @@ class User extends Authenticatable
 
     public function updates()
     {
-        return $this->hasMany('App\CompanyUpdates', 'user_id');
+        return $this->hasMany('App\CompanyUpdate', 'user_id');
+    }
+
+    public function benefits() {
+        return $this->hasMany('App\CompanyBenefit', 'user_id');
     }
 }
