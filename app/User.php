@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function benefits() {
         return $this->hasMany('App\CompanyBenefit', 'user_id');
     }
+
+    public function companyVision()
+    {
+        return $this->hasMany('App\CompanyVision', 'user_id');
+    }
 }
