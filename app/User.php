@@ -55,6 +55,6 @@ class User extends Authenticatable
 
     public function companyVision()
     {
-        return $this->hasMany('App\CompanyVision', 'user_id');
+        return $this->hasOne('App\CompanyVision', 'user_id');
     }
 }
