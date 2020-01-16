@@ -42,6 +42,11 @@ Route::middleware('auth:api')->group(function () {
 
     // benefits
     Route::post('employer/benefits/collection', 'Api\Employer\BenefitsController@storeCollection');
+
+    // vision
+    Route::get('employer/{id}/vision', 'Api\Employer\UpdatesController@index');
+    Route::post('employer/vision', 'Api\Employer\UpdatesController@store');
+    Route::put('employer/vision/{id}', 'Api\Employer\UpdatesController@update');
     
 });
 
