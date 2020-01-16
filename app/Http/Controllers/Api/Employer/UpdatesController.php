@@ -69,7 +69,44 @@ class UpdatesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'description' => 'required',
+        ]);
+
         $update = CompanyUpdate::find($id);
+
+        $update->description = $request->input('description');
+        $update->tags = $request->input('tags');
+        $update->is_pinned = $request->input('isPinned');
+        $update->user_id = auth()->id();
+
+        if ($request->hasFile('imgFile')) {
+            // if already has an image we delete it
+            if($update->img_url !== null) { 
+                $parsedUrl = parse_url($update->img_url);
+
+                Storage::delete($parsedUrl['path']);
+            }
+
+            $path  = $request->file('imgFile')->store(
+                'companies/updates',
+                'do_spaces'
+            );
+
+            $update->img_url = Storage::disk('do_spaces')->url($path);
+        }
+
+        if($request->input('imgUrl') !== $update->img_url) {
+            $parsedUrl = parse_url($update->img_url);
+
+            Storage::delete($parsedUrl['path']);
+        }
+
+        $update->save();
+
+        return response()->json([
+            'update' => new CompanyUpdateResource($update)
+        ]);
     }
 
     /**
