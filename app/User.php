@@ -57,4 +57,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\CompanyVision', 'user_id');
     }
+
+    public function coreValues() {
+        return $this->hasMany('App\CompanyCoreValues', 'user_id');
+    }
+
+    public function companyWhyUs() {
+        return $this->hasOne('App\CompanyWhyUs', 'user_id');
+    }
 }

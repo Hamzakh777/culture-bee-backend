@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyUpdate extends Model
+class CompanyWhyUs extends Model
 {
     public function owner()
     {
