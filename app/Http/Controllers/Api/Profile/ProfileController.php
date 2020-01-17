@@ -25,7 +25,7 @@ class ProfileController extends Controller
                 'users/profile-img',
                 'do_spaces'
             );
-
+            // we should delete old files if they exist
             $user->profile_img_url = Storage::disk('do_spaces')->url($path);
         }
 
@@ -34,7 +34,7 @@ class ProfileController extends Controller
                 'users/cover-img',
                 'do_spaces'
             );
-
+            // we should delete old files if they exist
             $user->cover_img_url = Storage::disk('do_spaces')->url($path);
         }
 
@@ -52,6 +52,10 @@ class ProfileController extends Controller
 
         if ($request->has('skills')) {
             $user->skills = json_encode($request->input('skills'));
+        }
+
+        if ($request->has('quickPitch')) {
+            $user->quick_pitch = $request->input('quick_pitch');
         }
 
         $user->save();
