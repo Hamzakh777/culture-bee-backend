@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyCoreValues extends Model
+class CompanyCoreValue extends Model
 {
     public function owner()
     {

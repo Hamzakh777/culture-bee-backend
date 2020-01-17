@@ -16,8 +16,8 @@ class CreateCompanyBenefitsTable extends Migration
         Schema::create('company_benefits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('subtitle');
-            $table->string('img_url');
+            $table->string('subtitle')->nullable();
+            $table->string('img_url')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
                 ->references('id')->on('users')

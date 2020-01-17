@@ -38,17 +38,29 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/employer/updates', 'Api\Employer\UpdatesController@store');
     Route::delete('/employer/updates/{id}', 'Api\Employer\UpdatesController@destroy');
     Route::put('/employer/updates/{id}', 'Api\Employer\UpdatesController@update');
-    Route::get('/employer/{id}/updates', 'Api\Employer\UpdatesController@index');
 
     // benefits
     Route::post('employer/benefits/collection', 'Api\Employer\BenefitsController@storeCollection');
+    Route::put('employer/benefits/{id}', 'Api\Employer\BenefitsController@update');
+    Route::delete('/employer/benefits/{id}', 'Api\Employer\BenefitsController@destroy');
 
     // vision
-    Route::get('employer/{id}/vision', 'Api\Employer\UpdatesController@index');
-    Route::post('employer/vision', 'Api\Employer\UpdatesController@store');
-    Route::put('employer/vision/{id}', 'Api\Employer\UpdatesController@update');
-    
+    Route::get('employer/{id}/vision', 'Api\Employer\VisionController@index');
+    Route::post('employer/vision', 'Api\Employer\VisionController@store');
+    Route::put('employer/vision/{id}', 'Api\Employer\VisionController@update');
+
+    // why us
+    Route::post('employer/why-us', 'Api\Employer\WhyUsController@store');
 });
 
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
+
+// benefits
+Route::get('/employer/{id}/benefits', 'Api\Employer\BenefitsController@index');
+
+// why us
+Route::get('employer/{id}/why-us', 'Api\Employer\WhyUsController@index');
+
+// update 
+Route::get('/employer/{id}/updates', 'Api\Employer\UpdatesController@index');

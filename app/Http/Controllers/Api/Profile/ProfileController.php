@@ -55,7 +55,7 @@ class ProfileController extends Controller
         }
 
         if ($request->has('quickPitch')) {
-            $user->quick_pitch = $request->input('quick_pitch');
+            $user->quick_pitch = $request->input('quickPitch');
         }
 
         $user->save();
