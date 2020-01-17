@@ -16,7 +16,7 @@ class ValuesController extends Controller
      */
     public function index($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         return response()->json([
             'values' => $user->values
@@ -45,9 +45,13 @@ class ValuesController extends Controller
         
         $updatedValues = [];
         foreach ($values as $key => $value) {
-            $value['user_id'] = $user->id;
+            $newValue = [];
+            
+            $newValue['user_id'] = $user->id;
+            $newValue['title'] = $value['title'];
+            $newValue['icon'] = $value['icon'];
 
-            array_push($updatedValues, $value);
+            array_push($updatedValues, $newValue);
         }
 
         DB::table('company_values')->insert($updatedValues);
@@ -61,7 +65,8 @@ class ValuesController extends Controller
         }
 
         return [
-            'success' => true
+            'success' => true,
+            'values' => $values
         ];
     }
 }

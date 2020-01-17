@@ -18,10 +18,10 @@ class BenefitsController extends Controller
      */
     public function index($id)
     {
-        $benefits = User::find($id)->benefits;
+        $benefits = User::findOrFail($id)->benefits;
 
         return response()->json([
-            'updates' => CompanyBenefitResource::collection($benefits)
+            'benefits' => CompanyBenefitResource::collection($benefits)
         ]);
     }
 

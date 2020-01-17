@@ -45,7 +45,6 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/employer/benefits/{id}', 'Api\Employer\BenefitsController@destroy');
 
     // vision
-    Route::get('employer/{id}/vision', 'Api\Employer\VisionController@index');
     Route::post('employer/vision', 'Api\Employer\VisionController@store');
     Route::put('employer/vision/{id}', 'Api\Employer\VisionController@update');
 
@@ -56,6 +55,9 @@ Route::middleware('auth:api')->group(function () {
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 
+// values
+Route::get('/employer/{id}/values', 'Api\Employer\ValuesController@index');
+
 // benefits
 Route::get('/employer/{id}/benefits', 'Api\Employer\BenefitsController@index');
 
@@ -64,3 +66,6 @@ Route::get('employer/{id}/why-us', 'Api\Employer\WhyUsController@index');
 
 // update 
 Route::get('/employer/{id}/updates', 'Api\Employer\UpdatesController@index');
+
+// vision 
+Route::get('employer/{id}/vision', 'Api\Employer\VisionController@index');
