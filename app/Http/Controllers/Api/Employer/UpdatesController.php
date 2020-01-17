@@ -18,7 +18,7 @@ class UpdatesController extends Controller
      */
     public function index($id)
     {
-        $updates = User::find($id)->companyUpdates;
+        $updates = User::findOrFail($id)->updates;
 
         return response()->json([
             'updates' => CompanyUpdateResource::collection($updates)
@@ -74,6 +74,13 @@ class UpdatesController extends Controller
         ]);
 
         $update = CompanyUpdate::find($id);
+
+        if ($request->input('imgUrl') !== $update->img_url) {
+            $parsedUrl = parse_url($update->img_url);
+            Storage::delete($parsedUrl['path']);
+
+            $update->img_url = null;
+        }
 
         $update->description = $request->input('description');
         $update->tags = $request->input('tags');

@@ -18,7 +18,7 @@ class CompanyUpdate extends JsonResource
             'id' => $this->id,
             'description' => $this->description,
             'tags' => json_decode($this->tags),
-            'isPinned' => $this->is_pinned,
+            'isPinned' => (int)$this->is_pinned,
             'imgUrl' => $this->img_url
         ];
     }
