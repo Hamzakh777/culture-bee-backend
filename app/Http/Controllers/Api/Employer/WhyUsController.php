@@ -16,9 +16,18 @@ class WhyUsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $companyWhyUs = $user->companyWhyUs;
+        $coreValues = $user->coreValues;
+
+        return response()->json([
+            'tagline' => $companyWhyUs->tagline,
+            'ethos' => $companyWhyUs->ethos,
+            'coreValues' => $coreValues
+        ]);
     }
 
     /**
@@ -56,8 +65,8 @@ class WhyUsController extends Controller
         }
         DB::table('company_core_values')->insert($coreValuesToStore);
 
-        if ($user->current_profile_creation_step < 4) {
-            $user->current_profile_creation_step = 4;
+        if ($user->current_profile_creation_step < 3) {
+            $user->current_profile_creation_step = 3;
 
             $user->save();
         }

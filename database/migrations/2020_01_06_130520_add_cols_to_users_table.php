@@ -17,7 +17,7 @@ class AddColsToUsersTable extends Migration
             $table->string('profile_img_url')->nullable();
             $table->string('cover_img_url')->nullable();
             $table->text('quick_pitch')->nullable();
-            $table->tinyInteger('current_profile_creation_step')->unsigned()->default(1);
+            $table->tinyInteger('current_profile_creation_step')->unsigned()->default(0);
             $table->string('location')->nullable();
             $table->string('company_name')->nullable();
             $table->json('skills')->nullable();

@@ -58,8 +58,8 @@ class ValuesController extends Controller
 
         // if its the first time the user is creating values
         // we increment his profile creation step
-        if($user->current_profile_creation_step === 1) {
-            $user->current_profile_creation_step = 2;
+        if($user->current_profile_creation_step === 0) {
+            $user->current_profile_creation_step = 1;
 
             $user->save();
         }
