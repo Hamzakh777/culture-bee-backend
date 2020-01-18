@@ -55,6 +55,9 @@ Route::middleware('auth:api')->group(function () {
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 
+// employer
+Route::get('/employer/{id}', 'Api\Employer\ProfileController@index');
+
 // values
 Route::get('/employer/{id}/values', 'Api\Employer\ValuesController@index');
 

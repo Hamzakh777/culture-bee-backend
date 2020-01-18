@@ -24,7 +24,7 @@ class Users extends JsonResource
             'coverImgUrl' => $this->cover_img_url,
             'quickPitch' => $this->quick_pitch,
             'currentProfileCreationStep' => $this->current_profile_creation_step,
-            'role' => $this->roles->pluck('name')
+            'role' => $this->roles->pluck('name')->first()
         ];
     }
 }
