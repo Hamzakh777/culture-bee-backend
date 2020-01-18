@@ -65,8 +65,8 @@ class WhyUsController extends Controller
         }
         DB::table('company_core_values')->insert($coreValuesToStore);
 
-        if ($user->current_profile_creation_step < 3) {
-            $user->current_profile_creation_step = 3;
+        if ($user->current_profile_creation_step < 4) {
+            $user->current_profile_creation_step = 4;
 
             $user->save();
         }
