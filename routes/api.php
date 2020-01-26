@@ -21,7 +21,7 @@ Route::post('newsletter', 'Api\Newsletter\NewsletterController@store');
 Route::middleware('auth:api')->group(function () {
     // jobs
     // Route::get('jobs', 'Api\Jobs\JobsController@index');
-    // Route::post('jobs', 'Api\Jobs\JobsController@store');
+    Route::post('jobs', 'Api\Jobs\JobsController@store');
     // Route::post('jobs/{id}/publish', 'Api\Jobs\JobsPublishController');
     
     // auth
