@@ -32,6 +32,10 @@ class CreateJobsTable extends Migration
             $table->string('family_photo')->nullable();
             $table->string('application_url')->nullable();
             $table->string('appplication_email')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
