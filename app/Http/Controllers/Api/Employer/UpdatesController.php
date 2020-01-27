@@ -55,6 +55,13 @@ class UpdatesController extends Controller
 
         $update->save();
 
+        $user = User::find(auth()->id());
+        if ($user->current_profile_creation_step < 2) {
+            $user->current_profile_creation_step = 2;
+
+            $user->save();
+        }
+
         return response()->json([
             'update' => new CompanyUpdateResource($update)
         ]);

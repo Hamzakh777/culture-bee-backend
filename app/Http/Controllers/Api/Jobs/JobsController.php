@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Jobs;
 
 use App\Job;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -79,6 +80,13 @@ class JobsController extends Controller
         $job->user_id = Auth::id();
 
         $job->save();
+
+        $user = User::find(auth()->id());
+        if ($user->current_profile_creation_step < 5) {
+            $user->current_profile_creation_step = 5;
+
+            $user->save();
+        }
 
         return response()->json([
             'status' => 'success',
