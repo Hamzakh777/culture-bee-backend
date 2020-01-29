@@ -65,4 +65,8 @@ class User extends Authenticatable
     public function companyWhyUs() {
         return $this->hasOne('App\CompanyWhyUs', 'user_id');
     }
+
+    public function jobs() {
+        return $this->hasMany('App\Job', 'user_id');
+    }
 }

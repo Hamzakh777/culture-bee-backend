@@ -60,8 +60,12 @@ class WhyUsController extends Controller
         $coreValues = $request->input('coreValues');
         $coreValuesToStore = [];
         foreach ($coreValues as $key => $coreValue) {
-            $coreValue['user_id'] = $user->id;
-            array_push($coreValuesToStore, $coreValue);
+            $newCoreValue = [];
+            $newCoreValue['user_id'] = $user->id;
+            $newCoreValue['title'] = $coreValue['title'];
+            $newCoreValue['subtitle'] = $coreValue['subtitle'];
+            $newCoreValue['description'] = $coreValue['description'];
+            array_push($coreValuesToStore, $newCoreValue);
         }
         DB::table('company_core_values')->insert($coreValuesToStore);
 

@@ -55,7 +55,7 @@ Route::middleware('auth:api')->group(function () {
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 
-// employer
+// ************** employer
 Route::get('/employer/{id}', 'Api\Employer\ProfileController@index');
 
 // values
@@ -72,3 +72,9 @@ Route::get('/employer/{id}/updates', 'Api\Employer\UpdatesController@index');
 
 // vision 
 Route::get('employer/{id}/vision', 'Api\Employer\VisionController@index');
+
+// jobs
+Route::get('employer/{id}/jobs', 'Api\Employer\JobsController');
+
+// jobs
+Route::get('jobs/{id}', 'Api\Jobs\JobsController@show');

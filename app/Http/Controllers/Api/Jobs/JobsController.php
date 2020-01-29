@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Jobs;
 
 use App\Job;
 use App\User;
+use App\Http\Resources\Job as JobResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +57,7 @@ class JobsController extends Controller
         $job->skills = $request->input('skills');
         $job->tags = $request->input('tags');
         $job->ownership_values = $request->input('ownershipValues');
-        $job->application_qualities = $request->input('applicationQualities');
+        $job->applicant_qualities = $request->input('applicantQualities');
 
         // storing files
         if ($request->hasFile('promoPhoto')) {
@@ -65,7 +66,7 @@ class JobsController extends Controller
                 'do_spaces'
             );
 
-            $job->promo_photo_link = Storage::disk('do_spaces')->url($path);
+            $job->promo_photo_url = Storage::disk('do_spaces')->url($path);
         }
 
         if ($request->hasFile('familyPhoto')) {
@@ -74,23 +75,23 @@ class JobsController extends Controller
                 'do_spaces'
             );
 
-            $job->family_photo = Storage::disk('do_spaces')->url($path);
+            $job->family_photo_url = Storage::disk('do_spaces')->url($path);
         }
 
-        $job->user_id = Auth::id();
+        $job->user_id = auth()->id();
 
         $job->save();
 
         $user = User::find(auth()->id());
-        if ($user->current_profile_creation_step < 5) {
-            $user->current_profile_creation_step = 5;
+        if ($user->current_profile_creation_step < 6) {
+            $user->current_profile_creation_step = 6;
 
             $user->save();
         }
 
         return response()->json([
             'status' => 'success',
-            'job' => $job
+            'job' => new JobResource($job)
         ]);
     }
 
@@ -102,8 +103,11 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        $job = Job::where('id', $id)->get();
-        
+        $job = Job::where('id', $id)->first();
+
+        return response()->json([
+            'job' => new JobResource($job)
+        ]);  
     }
 
     /**

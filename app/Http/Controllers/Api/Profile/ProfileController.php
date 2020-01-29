@@ -26,6 +26,10 @@ class ProfileController extends Controller
                 'do_spaces'
             );
             // we should delete old files if they exist
+            if ($user->profile_img_url !== null) {
+                $parsedUrl = parse_url($user->profile_img_url);
+                Storage::delete($parsedUrl['path']);
+            }
             $user->profile_img_url = Storage::disk('do_spaces')->url($path);
         }
 
@@ -35,6 +39,10 @@ class ProfileController extends Controller
                 'do_spaces'
             );
             // we should delete old files if they exist
+            if ($user->cover_img_url !== null) {
+                $parsedUrl = parse_url($user->cover_img_url);
+                Storage::delete($parsedUrl['path']);
+            }
             $user->cover_img_url = Storage::disk('do_spaces')->url($path);
         }
 

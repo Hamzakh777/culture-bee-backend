@@ -25,11 +25,11 @@ class CreateJobsTable extends Migration
             $table->json('skills')->nullable();
             $table->string('application_email')->nullable();
             $table->json('ownership_values')->nullable();
-            $table->json('application_qualities')->nullable();
-            $table->string('promo_photo_link')->nullable();
+            $table->json('applicant_qualities')->nullable();
+            $table->string('promo_photo_url')->nullable();
             $table->text('about_the_colleagues')->nullable();
             $table->text('why_this_role')->nullable();
-            $table->string('family_photo')->nullable();
+            $table->string('family_photo_url')->nullable();
             $table->string('application_url')->nullable();
             $table->string('appplication_email')->nullable();
             $table->bigInteger('user_id')->unsigned();
