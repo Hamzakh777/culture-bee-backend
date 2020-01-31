@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +24,7 @@ class Job extends Model
     public function toSearchableArray()
     {
         $array = [
-            'id' => $this->id,
+            'user_id' => $this->user_id,
             'job_title' => $this->job_title,
             'location' => $this->location,
             'industry' => $this->industry,
@@ -32,7 +33,9 @@ class Job extends Model
             'quick_pitch' => $this->quick_pitch,
             'tags' => $this->tags,
             'skills' => $this->skills,
-            'why_this_role' => $this->why_this_role
+            'why_this_role' => $this->why_this_role,
+            'created_at' => $this->created_at,
+            'created_at_timestamp' => Carbon::parse($this->created_at)->timestamp
         ];
 
 

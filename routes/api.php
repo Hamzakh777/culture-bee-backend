@@ -45,7 +45,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/employer/benefits/{id}', 'Api\Employer\BenefitsController@destroy');
 
     // employer jobs
-    Route::post('employer/jobs', 'Api\Employer\JobsSearchController');
+    Route::post('employer/jobs/search', 'Api\Employer\JobsSearchController');
 
     // vision
     Route::post('employer/vision', 'Api\Employer\VisionController@store');
