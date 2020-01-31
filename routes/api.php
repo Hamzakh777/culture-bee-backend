@@ -44,6 +44,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('employer/benefits/{id}', 'Api\Employer\BenefitsController@update');
     Route::delete('/employer/benefits/{id}', 'Api\Employer\BenefitsController@destroy');
 
+    // employer jobs
+    Route::post('employer/jobs', 'Api\Employer\JobsSearchController');
+
     // vision
     Route::post('employer/vision', 'Api\Employer\VisionController@store');
     Route::put('employer/vision/{id}', 'Api\Employer\VisionController@update');
