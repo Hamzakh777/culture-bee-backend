@@ -35,6 +35,7 @@ class Job extends Model
             'skills' => $this->skills,
             'why_this_role' => $this->why_this_role,
             'created_at' => $this->created_at,
+            'is_unexpired' => $this->is_unexpired,
             'created_at_timestamp' => Carbon::parse($this->created_at)->timestamp
         ];
 

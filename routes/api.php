@@ -23,6 +23,8 @@ Route::middleware('auth:api')->group(function () {
     // Route::get('jobs', 'Api\Jobs\JobsController@index');
     Route::post('jobs', 'Api\Jobs\JobsController@store');
     Route::delete('jobs/{id}', 'Api\Jobs\JobsController@destroy');
+    Route::post('jobs/{id}/expire', 'Api\Jobs\JobsExpireController');
+    Route::post('jobs/{id}/renew', 'Api\Jobs\JobsRenewController');
     // Route::post('jobs/{id}/publish', 'Api\Jobs\JobsPublishController');
     
     // auth

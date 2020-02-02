@@ -33,6 +33,7 @@ class Job extends JsonResource
             'promoPhotoUrl' => $this->promo_photo_url,
             'aboutTheColleagues' => $this->about_the_colleagues,
             'familyPhotoUrl' => $this->family_photo_url,
+            'isUnexpired' => $this->is_unexpired,
             'createdAt' => Carbon::parse($this->created_at)->calendar(),
             'userId' => $this->user_id,
             'owner' => $this->owner
