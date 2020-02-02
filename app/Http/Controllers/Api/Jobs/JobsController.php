@@ -141,6 +141,28 @@ class JobsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::findOrFail($id);
+        
+        if($job->user_id !== auth()->id()) return response()->json([
+            'status' => 'unauthorized'
+        ]);
+
+        if ($job->family_photo_url !== null) {
+            $parsedUrl = parse_url($job->family_photo_url);
+
+            Storage::delete($parsedUrl['path']);
+        }
+
+        if ($job->promo_photo_url !== null) {
+            $parsedUrl = parse_url($job->promo_photo_url);
+
+            Storage::delete($parsedUrl['path']);
+        }
+
+        $job->delete();
+
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 }
