@@ -131,7 +131,15 @@ class UpdatesController extends Controller
      */
     public function destroy($id)
     {
-        CompanyUpdate::find($id)->delete();
+        $update = CompanyUpdate::findOrFail($id);
+
+        if ($update->img_url !== null) {
+            $parsedUrl = parse_url($update->img_url);
+
+            Storage::delete($parsedUrl['path']);
+        }
+
+        $update->delete();
         
         return response()->json([
             'success' => true
