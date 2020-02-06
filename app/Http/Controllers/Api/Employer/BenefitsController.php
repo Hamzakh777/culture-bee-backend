@@ -26,6 +26,38 @@ class BenefitsController extends Controller
     }
 
     /**
+     * Create a benefit
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'subtitle' => 'required'
+        ]);
+
+        $benefit = new CompanyBenefit();
+
+        $benefit->title = $request->input('title');
+        $benefit->subtitle = $request->input('subtitle');
+
+        if ($request->hasFile('imgFile')) {
+            $path = Storage::disk('do_spaces')->putFile('companies/benefits', $request->file('imgFile'));
+
+            $benefit->img_url = Storage::disk('do_spaces')->url($path);
+        }
+
+        $benefit->user_id = auth()->id();
+
+        $benefit->save();
+
+        return response()->json([
+            'benefit' => new CompanyBenefitResource($benefit)
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
