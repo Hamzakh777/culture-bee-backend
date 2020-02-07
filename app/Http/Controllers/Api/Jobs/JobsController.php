@@ -52,6 +52,7 @@ class JobsController extends Controller
         $job->application_url = $request->input('applicationUrl');
         $job->about_the_colleagues = $request->input('aboutTheColleagues');
         $job->why_this_role = $request->input('whyThisRole');
+        $job->is_unexpired = 0;
 
         // storing json
         $job->skills = $request->input('skills');
