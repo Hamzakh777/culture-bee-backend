@@ -33,9 +33,6 @@ class ValuesController extends Controller
     {
         $user = User::find(auth()->id());
 
-        $request->validate([
-            'values' => 'required',
-        ]);
 
         // delete any previous values for the authenticated user 
         $user->values()->delete();
