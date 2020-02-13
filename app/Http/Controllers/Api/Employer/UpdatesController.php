@@ -18,7 +18,12 @@ class UpdatesController extends Controller
      */
     public function index($id)
     {
-        $updates = User::findOrFail($id)->updates;
+        $user = User::find($id);
+        $updates = [];
+        
+        if($user !== null) {
+            $updates = $user->updates;
+        }
 
         return response()->json([
             'updates' => CompanyUpdateResource::collection($updates)
