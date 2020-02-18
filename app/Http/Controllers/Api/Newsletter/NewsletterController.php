@@ -10,10 +10,11 @@ class NewsletterController extends Controller
 {
     public function store(Request $request) {
         $validated = $request->validate([
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'audienceType' => 'required'
         ]);
 
-        Newsletter::subscribe($request->input('email'));
+        Newsletter::subscribe($request->input('email'), ['AUDIENCE' => $request->input('audienceType')]);
 
         return response()->json([
             'success' => true
