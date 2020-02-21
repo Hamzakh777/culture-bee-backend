@@ -46,4 +46,8 @@ class Job extends Model
     public function owner() {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function applications() {
+        return $this->belongsToMany('App\User', 'job_application');
+    }
 }

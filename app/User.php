@@ -83,4 +83,8 @@ class User extends Authenticatable
     public function resumes() {
         return $this->hasMany('App\Resume', 'user_id');
     }
+
+    public function jobApplications() {
+        return $this->belongsToMany('App\Job', 'job_application');
+    }
 }
