@@ -23,16 +23,6 @@ class JobsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -104,7 +94,7 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        $job = Job::where('id', $id)->first();
+        $job = Job::findOrFail($id);
 
         return response()->json([
             'job' => new JobResource($job)
