@@ -26,6 +26,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('jobs/{id}', 'Api\Jobs\JobsController@destroy');
     Route::post('jobs/{id}/expire', 'Api\Jobs\JobsExpireController');
     Route::post('jobs/{id}/renew', 'Api\Jobs\JobsRenewController');
+    Route::post('jobs/{id}/apply', 'Api\Jobs\JobsApplyController');
     // Route::post('jobs/{id}/publish', 'Api\Jobs\JobsPublishController');
     
     // auth
@@ -58,6 +59,10 @@ Route::middleware('auth:api')->group(function () {
 
     // why us
     Route::post('employer/why-us', 'Api\Employer\WhyUsController@store');
+
+    // following 
+    Route::post('user/{id}/follow', 'Api\User\FollowController');
+    Route::post('user/{id}/follow', 'Api\User\UnfollowController');
 });
 
 Route::post('login', 'Api\AuthController@login');
