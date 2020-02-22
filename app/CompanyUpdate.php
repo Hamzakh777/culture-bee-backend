@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFollow\Traits\CanBeLiked;
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyUpdate extends Model
 {
-    use CanBeLiked;
+    use CanBeLiked, Searchable;
     
     public function owner()
     {
