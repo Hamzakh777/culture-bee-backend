@@ -87,4 +87,8 @@ class User extends Authenticatable
     public function jobApplications() {
         return $this->belongsToMany('App\Job', 'job_application');
     }
+
+    public function phoneNumbers() {
+        return $this->hasMany('App\PhoneNumber', 'user_id');
+    }
 }
