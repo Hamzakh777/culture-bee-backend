@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\Users;
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,7 +20,8 @@ class CompanyUpdate extends JsonResource
             'description' => $this->description,
             'tags' => json_decode($this->tags),
             'isPinned' => (int)$this->is_pinned,
-            'imgUrl' => $this->img_url
+            'imgUrl' => $this->img_url,
+            'owner' => new Users($this->owner)
         ];
     }
 }
