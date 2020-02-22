@@ -18,6 +18,9 @@ Auth::routes();
 
 Route::post('newsletter', 'Api\Newsletter\NewsletterController@store');
 
+// search 
+Route::post('search', 'Api\Search\SearchController');
+
 Route::middleware('auth:api')->group(function () {
     // jobs
     // Route::get('jobs', 'Api\Jobs\JobsController@index');
