@@ -15,6 +15,10 @@ class UnfollowController extends Controller
      */
     public function __invoke(Request $request, $id)
     {
-        //
+        auth()->user()->unfollow($id);
+
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 }
