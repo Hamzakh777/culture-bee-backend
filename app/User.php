@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFollow\Traits\CanFollow;
 use Overtrue\LaravelFollow\Traits\CanBeFollowed;
 use Overtrue\LaravelFollow\Traits\CanLike;
@@ -14,7 +16,7 @@ use App\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
 {
-    use CanLike, CanBeFollowed, CanFollow, HasRoles, HasApiTokens, Notifiable;
+    use CanLike, CanBeFollowed, CanFollow, HasRoles, HasApiTokens, Notifiable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +45,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'skills' => 'array'
     ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = [
+            'id' => $this->id,
+            'role' => $this->roles->pluck('name')->first(),
+            'quick_pitch' => $this->quick_pitch,
+            'location' => $this->location,
+            'email' => $this->email,
+            'name' => $this->name,
+            'companyName' => $this->company_name,
+            'industry' => $this->industry,
+            'created_at' => $this->created_at,
+            'created_at_timestamp' => Carbon::parse($this->created_at)->timestamp
+        ];
+
+
+        return $array;
+    }
 
     public function sendPasswordResetNotification($token)
     {
@@ -90,5 +116,9 @@ class User extends Authenticatable
 
     public function phoneNumbers() {
         return $this->hasMany('App\PhoneNumber', 'user_id');
+    }
+
+    public function jobSeekerDetail() {
+        return $this->hasOne('App\User', 'user_id');
     }
 }
