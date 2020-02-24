@@ -65,7 +65,11 @@ Route::middleware('auth:api')->group(function () {
 
     // following 
     Route::post('user/{id}/follow', 'Api\User\FollowController');
-    Route::post('user/{id}/follow', 'Api\User\UnfollowController');
+    Route::post('user/{id}/unfollow', 'Api\User\UnfollowController');
+
+    // job seeker 
+    Route::post('job-seeker/about-me', 'Api\JobSeeker\AboutMeController@store');
+    Route::put('job-seeker/about-me', 'Api\JobSeeker\AboutMeController@update');
 });
 
 Route::post('login', 'Api\AuthController@login');
@@ -94,3 +98,8 @@ Route::get('employer/{id}/jobs', 'Api\Employer\JobsController');
 
 // jobs
 Route::get('jobs/{id}', 'Api\Jobs\JobsController@show');
+
+/** 
+ * Job seeker
+*/
+Route::get('job-seeker/about-me', 'Api\JobSeeker\AboutMeController@show');
