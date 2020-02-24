@@ -49,8 +49,8 @@ class AuthController extends Controller
         // Requesting Tokens
         $request->request->add([
             'grant_type'    => 'password',
-            'client_id'     => 1,
-            'client_secret' => 'sLmYHlqXyO76SxXFXKc7TVA5ygtMKQ021yhgvq8t',
+            'client_id'     => 2,
+            'client_secret' => 'EI7AHagZZXVNdBrTEWFrQWKm3ynefa8pSrEtiCzK',
             'username'      => $request->input('email'),
             'password'      => $request->input('password'),
             'scope'         => '',
