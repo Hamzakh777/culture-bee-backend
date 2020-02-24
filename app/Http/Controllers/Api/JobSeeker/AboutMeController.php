@@ -2,31 +2,13 @@
 
 namespace App\Http\Controllers\Api\JobSeeker;
 
+use App\JobSeekerDetail;
+use App\PhoneNumber;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AboutMeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -35,7 +17,34 @@ class AboutMeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'aboutMe' => 'required'
+        ]);
+
+        $user = auth()->user();
+
+        $jobSeekerDetail = new JobSeekerDetail();
+
+        $jobSeekerDetail->about_me = $request->input('aboutMe');
+        $jobSeekerDetail->user_id = $user->id;
+
+        $jobSeekerDetail->save();
+
+        $phoneNumber = '';
+        if($request->input('phoneNumber') !== null) {
+            $phoneNumber = new PhoneNumber();
+
+            $phoneNumber->phone_number = $request->input('phoneNumber');
+            $phoneNumber->user_id = $user->id;
+
+            $phoneNumber->save();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'aboutMe' => $jobSeekerDetail->about_me,
+            'phoneNumber' => $phoneNumber
+        ]);
     }
 
     /**
@@ -46,18 +55,10 @@ class AboutMeController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            'aboutMe' => 'test',
+            'phoneNumber' => 'adfasdf'
+        ]);
     }
 
     /**
@@ -67,19 +68,40 @@ class AboutMeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'aboutMe' => 'required'
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $userId = auth()->id();
+
+        $jobSeekerDetail = JobSeekerDetail::where('user_id', $userId)->first();
+
+        $jobSeekerDetail->about_me = $request->input('aboutMe');
+
+        $jobSeekerDetail->save();
+
+        $phoneNumber = '';
+        if ($request->input('phoneNumber') !== null) {
+            $phoneNumber = new PhoneNumber();
+
+            $phoneNumber->phone_number = $request->input('phoneNumber');
+            $phoneNumber->user_id = $userId;
+
+            $phoneNumber->save();
+        } else if (PhoneNumber::where('user_id', $userId)->first() !== null) {
+            $phoneNumber = PhoneNumber::where('user_id', $userId)->first();
+
+            $phoneNumber->phone_number = $request->input('phoneNumber');
+
+            $phoneNumber->save();
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'aboutMe' => $jobSeekerDetail->about_me,
+            'phoneNumber' => $phoneNumber->phone_number
+        ]);
     }
 }
