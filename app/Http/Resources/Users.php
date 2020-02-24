@@ -14,6 +14,8 @@ class Users extends JsonResource
      */
     public function toArray($request)
     {
+        $user = auth()->user();
+
         return [
             'id' => $this->id,
             'location' => $this->location,
@@ -24,7 +26,9 @@ class Users extends JsonResource
             'coverImgUrl' => $this->cover_img_url,
             'quickPitch' => $this->quick_pitch,
             'currentProfileCreationStep' => $this->current_profile_creation_step,
-            'role' => $this->roles->pluck('name')->first()
+            'role' => $this->roles->pluck('name')->first(),
+            'user' => $user,
+            'following' => $user === null ? false : $user->isFollowing($this->id)
         ];
     }
 }

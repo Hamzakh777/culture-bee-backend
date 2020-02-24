@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use \Carbon\Carbon;
+use App\Http\Resources\Users;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Job extends JsonResource
@@ -36,7 +37,7 @@ class Job extends JsonResource
             'isUnexpired' => $this->is_unexpired,
             'createdAt' => Carbon::parse($this->created_at)->calendar(),
             'userId' => $this->user_id,
-            'owner' => $this->owner
+            'owner' => new Users($this->owner)
         ];
     }
 }

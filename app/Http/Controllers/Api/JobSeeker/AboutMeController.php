@@ -55,9 +55,12 @@ class AboutMeController extends Controller
      */
     public function show($id)
     {
+        $jobSeekerDetails = JobSeekerDetail::where('user_id', $id)->first();
+        $phoneNumber = PhoneNumber::where('user_id', $id)->first();
+
         return response()->json([
-            'aboutMe' => 'test',
-            'phoneNumber' => 'adfasdf'
+            'aboutMe' => $jobSeekerDetails ? $jobSeekerDetails->about_me : '',
+            'phoneNumber' => $phoneNumber ? $phoneNumber->phone_number : ''
         ]);
     }
 
