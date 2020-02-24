@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Resources\Users;
 namespace App\Http\Resources;
 
+use App\Http\Resources\Users;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyUpdate extends JsonResource
