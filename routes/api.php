@@ -102,4 +102,4 @@ Route::get('jobs/{id}', 'Api\Jobs\JobsController@show');
 /** 
  * Job seeker
 */
-Route::get('job-seeker/about-me', 'Api\JobSeeker\AboutMeController@show');
+Route::get('job-seeker/{id}/about-me', 'Api\JobSeeker\AboutMeController@show');
