@@ -23,9 +23,15 @@ class WhyUsController extends Controller
         $companyWhyUs = $user->companyWhyUs;
         $coreValues = $user->coreValues;
 
+        $tagline = '';
+        $ethos = '';
+        if($companyWhyUs !== [] && $companyWhyUs !== null) {
+            $tagline = $companyWhyUs->tagline;
+            $ethos = $companyWhyUs->ethos;
+        }
         return response()->json([
-            'tagline' => $companyWhyUs->tagline,
-            'ethos' => $companyWhyUs->ethos,
+            'tagline' => $tagline,
+            'ethos' => $ethos,
             'coreValues' => $coreValues
         ]);
     }
