@@ -46,6 +46,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/employer/updates', 'Api\Employer\UpdatesController@store');
     Route::delete('/employer/updates/{id}', 'Api\Employer\UpdatesController@destroy');
     Route::put('/employer/updates/{id}', 'Api\Employer\UpdatesController@update');
+    Route::post('/update/{id}/liking', 'Api\Update\LikesController');
 
     // benefits
     Route::post('employer/benefits/collection', 'Api\Employer\BenefitsController@storeCollection');

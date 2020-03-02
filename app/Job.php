@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     use Searchable;
+    
     /**
      * The relationships that should always be loaded.
      *

@@ -21,7 +21,9 @@ class CompanyUpdate extends JsonResource
             'tags' => json_decode($this->tags),
             'isPinned' => (int)$this->is_pinned,
             'imgUrl' => $this->img_url,
-            'owner' => new Users($this->owner)
+            'owner' => new Users($this->owner),
+            'isLiked' => $this->isLikedBy(auth()->user()),
+            'likes' => $this->likers
         ];
     }
 }
