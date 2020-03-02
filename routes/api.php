@@ -39,6 +39,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile', 'Api\Profile\ProfileController@update');
     Route::get('profile', 'Api\Profile\ProfileController@index');
 
+    // feed
+    Route::post('/feed', 'Api\Feed\FeedController');
+
     // ***************** employer
     Route::post('/employer/values', 'Api\Employer\ValuesController@store');
 
