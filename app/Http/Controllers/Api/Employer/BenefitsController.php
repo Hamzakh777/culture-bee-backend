@@ -83,7 +83,7 @@ class BenefitsController extends Controller
         $benefit->title = $request->input('title');
         $benefit->subtitle = $request->input('subtitle');
 
-        if($request->input('imgUrl') !== $benefit->img_url) {
+        if($request->input('imgUrl') !== strval($benefit->img_url)) {
             $parsedUrl = parse_url($benefit->img_url);
             Storage::delete($parsedUrl['path']);
 
@@ -138,46 +138,5 @@ class BenefitsController extends Controller
                 'message' => 'Not found'
             ]);
         }
-    }
-
-    /**
-     * Store more than 1 benefit at once
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeCollection(Request $request) {
-        $user = User::find(auth()->id());
-
-        $storedBenefits = [];
-        for ($i=1; $i < 7; $i++) {
-            $benefit = new CompanyBenefit();
-
-            $benefit->title = $request->input('title' . $i);
-            $benefit->subtitle = $request->input('subtitle' . $i);
-            $benefit->user_id = $user->id;
-
-            if ($request->hasFile('imgFile' . $i)) {
-                $path = Storage::disk('do_spaces')->putFile('companies/benefits', $request->file('imgFile' . $i));
-
-                $benefit->img_url = Storage::disk('do_spaces')->url($path);
-            }
-
-            $benefit->save();
-
-            array_push($storedBenefits, $benefit);
-        }
-
-        // if its the first time the user is creating benefits
-        // we increment his profile creation step
-        if ($user->current_profile_creation_step < 5) {
-            $user->current_profile_creation_step = 5;
-
-            $user->save();
-        }
-
-        return response()->json([
-            'benefits' => CompanyBenefitResource::collection($storedBenefits)
-        ]);
     }
 }
